@@ -1,7 +1,9 @@
 <?php
 /**
  * Plugin Name: WC External Variations
- * Plugin URI: https://web.impossibledreams.net/
+ * Plugin URI: https://github.com/impossibledreams/wc-external-variations
+ *
+ * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
  * Author: Impossible Dreams Network
  * Author URI: https://web.impossibledreams.net

@@ -18,5 +18,5 @@ Adds basic support for external products to WooCommerce variations/variable prod
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial Release
