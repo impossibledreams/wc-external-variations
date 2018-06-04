@@ -1,5 +1,5 @@
 === WC External Variations ===
-Contributors: yakovsh
+Contributors: impossibledreams, yakovsh
 Tags: woocommerce, external, variations, variable
 Requires at least: 4.0
 License: GPLv3 or later
