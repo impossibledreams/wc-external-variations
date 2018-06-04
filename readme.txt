@@ -6,7 +6,7 @@ License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
 Tested up to: 4.9.6
-Stable tag: 1.0
+Stable tag: trunk
 Requires PHP: 5.2.4
 
 A WordPress plugin that adds basic support for external products to WooCommerce variations/variable products
@@ -42,6 +42,8 @@ the functionality of the *Add to Cart* button, this plugin may not work or
 cause unintended consequences.
 
 Development of this plugin is done at [Github](https://github.com/impossibledreams/wc-external-variations)
+
+You can find this plugin at [WordPress.org](https://wordpress.org/plugins/wc-external-variations/)
 
 == Installation ==
 
