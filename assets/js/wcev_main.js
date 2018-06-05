@@ -12,6 +12,8 @@
   $(document).ready(function(){
     // Hook custom event on the 'Add to Cart' button in WooCommerce, for variations only
     $('.woocommerce-variation-add-to-cart .single_add_to_cart_button').click(function(event) {
+      // Error handling in case there is an issue with the URL
+      try {
 	    // Check if 'Add to Cart' button is still disabled, that means the variation has not been selected yet
 	    if (!this.classList.contains('disabled')) {
 		// Get variation ID and variations data form the form
@@ -28,25 +30,22 @@
 		    if (variationsData && variationsData._wcev_external_url) {
 		      var newWindow = window.open();
 		      newWindow.opener = null;
-
-		      // Error handling in case there is an issue with the URL
-		      try {
-			      newWindow.location = variationsData._wcev_external_url;
-		      } catch (error) {
-			alert('Unable to open link, an error has occured');
-		        if (console) {
-			    console.error(error);
-			}
-		      }
+		      newWindow.location = variationsData._wcev_external_url;
 
 		      // Stop propogating events so the item doesn't get added to cart
 		      return false;
 		    }
 		}
 	    }
+      } catch (error) {
+	alert('WC External Variations: An error has occured, see console');
+        if (console) {
+	    console.error(error);
+        }
+      }
 
-	    // Otherwise, continue event propogation so normal WooCommerce processing continues
-	    return true;
+      // Otherwise, continue event propogation so normal WooCommerce processing continues
+      return true;
     });
   });
 })(jQuery);
