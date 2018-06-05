@@ -59,5 +59,8 @@ click on *Add to Cart*.
 
 == Changelog ==
 
+= 1.0.1 =
+* Added error handling for invalid URLs in the Javascript code
+
 = 1.0.0 =
 * Initial Release

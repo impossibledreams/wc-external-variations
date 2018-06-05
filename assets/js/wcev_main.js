@@ -2,7 +2,7 @@
   * @description: This file is part of the WC External Variations plugin for Wordpress
   * @author: Impossible Dreams Network (https://web.impossibledreams.net)
   * @requires: jquery
-  * @version: 1.0.0
+  * @version: 1.0.1
   * @link: https://web.impossibledreams.net
   *
   * @copyright: Copyright (c) 2018 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
@@ -28,7 +28,16 @@
 		    if (variationsData && variationsData._wcev_external_url) {
 		      var newWindow = window.open();
 		      newWindow.opener = null;
-		      newWindow.location = variationsData._wcev_external_url;
+
+		      // Error handling in case there is an issue with the URL
+		      try {
+			      newWindow.location = variationsData._wcev_external_url;
+		      } catch (error) {
+			alert('Unable to open link, an error has occured');
+		        if (console) {
+			    console.error(error);
+			}
+		      }
 
 		      // Stop propogating events so the item doesn't get added to cart
 		      return false;
