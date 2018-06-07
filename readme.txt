@@ -22,17 +22,15 @@ redirect properly.
 
 = Shortcode support  =
 
-The external URL field supports shortcodes which you can use to define standard
-links across the entire installation.
+This plugin provides two shortcodes that you can use within your site:
+1. [wcev_external_sku] - can be used within the variation description to insert the External SKU Field.
+2. [wcev_product_attr] - allows you to display an product attribute, used the "name" attribute to find the right attribute.
+
 
 = External SKU field =
 
 A second field called "External SKU" is provided for each variation. You can
-set this field and then use the placeholder *%externalsku%* within both
-the external URL field and the variation description. The combination of this
-substitution and the shortcode support would allow you to set a standard
-set of URLs across the entire site, and then only change the external SKU within
-each item.
+set this field and then use the provided shortcode to display it.
 
 = More Details =
 
@@ -57,10 +55,14 @@ plugin into the '/wp-content/plugins/' directory or upload it via the
 click on *Add to Cart*.
 6. A new window should open with the external URL.
 
+== Upgrade Notice ==
+This version changes the external SKU replacement functionality into a shortcode.
+
 == Changelog ==
 
 = 1.0.1 =
-* Added error handling for invalid URLs in the Javascript code
+* Moved external SKU replacement into a shortcode
+* Added a shortcode for product attributes
 
 = 1.0.0 =
 * Initial Release
