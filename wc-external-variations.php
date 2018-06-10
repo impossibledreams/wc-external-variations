@@ -101,7 +101,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       	     * Shortcode function to retrieve and show the external SKU for a variation.
 	     */
 	    function wcev_variation_externalsku_shortcode( $atts, $content = null ) {
-		return $this->wcev_variation_customfield_shortcode( array('id' => 'wcev_product_attr'), null);
+		return $this->wcev_variation_customfield_shortcode( array('id' => '_wcev_external_sku'), null);
 	    }
 
 	    /**
