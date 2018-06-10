@@ -44,9 +44,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	     * Runs whatever code needs to be initialized after WooCommerce has loaded
 	     */
 	    public function init() {
-		// Adds shortcodes for showing attributes from products and external SKU for variations
+		// Adds shortcodes for showing attributes from products and custom fields + external SKU for variations
 		add_shortcode('wcev_product_attr', 	array( $this, 'wcev_product_getattribute_shortcode') );
 		add_shortcode('wcev_external_sku',  	array( $this, 'wcev_variation_externalsku_shortcode') );
+		add_shortcode('wcev_var_field',  	array( $this, 'wcev_variation_customfield_shortcode') );
 
 		// Hooks into the product editing code so custom fields can be shown and saved in the editor
 		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'wcev_filter_show_fields'), 10, 3 );
@@ -99,13 +100,24 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
       	     * Shortcode function to retrieve and show the external SKU for a variation.
 	     */
 	    function wcev_variation_externalsku_shortcode( $atts, $content = null ) {
+		return $this->wcev_variation_customfield_shortcode( array('id' => 'wcev_product_attr'), null);
+	    }
+
+	    /**
+      	     * Shortcode function to retrieve and show a custom field for a variation.
+	     */
+	    function wcev_variation_customfield_shortcode( $atts, $content = null ) {
+		// Parse the shortcode attributes
+		$atts = shortcode_atts( array('id' => '', ), $atts, 'wcev_var_field' );
+		$id = $atts['id'];
+
 		// Default return value is empty
 		$return = '';
 
 		// Try to get the attribute and return
 		global $wcev_variation_id;
-		if ( isset( $wcev_variation_id ) ) {
-			$values = get_post_meta( $wcev_variation_id, '_wcev_external_sku' );
+		if ( isset( $wcev_variation_id ) and !empty( $id ) ) {
+			$values = get_post_meta( $wcev_variation_id, $id );
                         if ( !empty( $values ) ) {
 				foreach ( $values as $value ) {
 					$return .= $value;
