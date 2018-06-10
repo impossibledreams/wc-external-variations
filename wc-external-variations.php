@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC External Variations
  * Plugin URI: https://github.com/impossibledreams/wc-external-variations
- * Version: 1.0.1
+ * Version: 1.0.2
  *
  * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
@@ -44,10 +44,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	     * Runs whatever code needs to be initialized after WooCommerce has loaded
 	     */
 	    public function init() {
-		// Adds shortcodes for showing attributes from products and custom fields + external SKU for variations
+		// Adds shortcodes
 		add_shortcode('wcev_product_attr', 	array( $this, 'wcev_product_getattribute_shortcode') );
 		add_shortcode('wcev_external_sku',  	array( $this, 'wcev_variation_externalsku_shortcode') );
 		add_shortcode('wcev_var_field',  	array( $this, 'wcev_variation_customfield_shortcode') );
+		add_shortcode('wcev_var_postdate',  	array( $this, 'wcev_variation_postdate_shortcode') );
 
 		// Hooks into the product editing code so custom fields can be shown and saved in the editor
 		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'wcev_filter_show_fields'), 10, 3 );
@@ -127,6 +128,18 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 		// Return value
 		return $return;
+	    }
+
+	    /**
+      	     * Shortcode function to show the post creation date for a variation.
+	     */
+	    function wcev_variation_postdate_shortcode( $atts, $content = null ) {
+		global $wcev_variation_id;
+		if ( isset( $wcev_variation_id ) ) {
+			return get_the_date('', $wcev_variation_id ) . ' ' . get_the_time('', $wcev_variation_id );
+		} else {
+			return '';
+		}
 	    }
 
 	    /**
