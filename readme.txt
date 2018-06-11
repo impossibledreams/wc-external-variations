@@ -23,15 +23,15 @@ redirect properly.
 = Shortcode support  =
 
 This plugin provides two shortcodes that you can use within your site:
-1. [wcev_external_sku] - can be used within the variation description to insert the External SKU Field.
+1. [wcev_external_sku] - can be used within the variation description to insert the External SKU Field, doesn't take attributes.
 2. [wcev_product_attr] - allows you to display an product attribute, use the "name" attribute to find the right attribute.
-3. [wcev_var_field] - allows you to display a custom field for a variation, use the "id" attribute to point to the right field/
-4. [wcev_var_postdate] - displays the formatted post date and time for a variation.
+3. [wcev_var_field] - allows you to display a custom field for a variation, use the "id" attribute to point to the right field.
+4. [wcev_var_postdate] - displays the formatted post date and time for a variation, doesn't take attributes.
 
 = External SKU field =
 
-A second field called "External SKU" is provided for each variation. You can
-set this field and then use the provided shortcode to display it.
+In addition to the external URL field, a second field called "External SKU" is provided for each variation. You can
+set this field and then use the provided shortcode to display it. The purpose is to track the external SKU separately from the internal one.
 
 = More Details =
 
@@ -57,7 +57,7 @@ click on *Add to Cart*.
 6. A new window should open with the external URL.
 
 == Upgrade Notice ==
-This version changes the external SKU replacement functionality into a shortcode.
+This version adds new shortcodes
 
 == Changelog ==
 
