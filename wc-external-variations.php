@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC External Variations
  * Plugin URI: https://github.com/impossibledreams/wc-external-variations
- * Version: 1.0.2
+ * Version: 1.0.3
  *
  * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
@@ -46,7 +46,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	    public function init() {
 		// Adds shortcodes
 		add_shortcode('wcev_product_attr', 	array( $this, 'wcev_product_getattribute_shortcode') );
-		add_shortcode('wcev_external_sku',  	array( $this, 'wcev_variation_externalsku_shortcode') );
 		add_shortcode('wcev_var_field',  	array( $this, 'wcev_variation_customfield_shortcode') );
 		add_shortcode('wcev_var_postdate',  	array( $this, 'wcev_variation_postdate_shortcode') );
 
@@ -95,13 +94,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 		// Return value
 		return $return;
-	    }
-
-	    /**
-      	     * Shortcode function to retrieve and show the external SKU for a variation.
-	     */
-	    function wcev_variation_externalsku_shortcode( $atts, $content = null ) {
-		return $this->wcev_variation_customfield_shortcode( array('id' => '_wcev_external_sku'), null);
 	    }
 
 	    /**
@@ -169,6 +161,18 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		    'value'       => get_post_meta( $variation->ID, '_wcev_external_sku', true )
 		)
 	       );
+
+	       // Load and show the External Status field
+	       woocommerce_wp_text_input( 
+		array( 
+		    'id'          => '_wcev_external_status[' . $variation->ID . ']', 
+		    'label'       => __( 'External Status', 'wc-external-variations' ), 
+		    'placeholder' => '',
+		    'desc_tip'    => 'true',
+		    'description' => __( 'Enter the status of the external product', 'wc-external-variations' ),
+		    'value'       => get_post_meta( $variation->ID, '_wcev_external_status', true )
+		)
+	       );
 	    }
 
 	    /**
@@ -183,6 +187,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		// Save the External SKU field
 		if ( isset( $_POST['_wcev_external_sku'][ $variation_id ] ) ) {
 	    	    update_post_meta( $variation_id, '_wcev_external_sku',  wc_clean( $_POST['_wcev_external_sku'][ $variation_id ] ) );
+		}
+
+		// Save the External status field
+		if ( isset( $_POST['_wcev_external_status'][ $variation_id ] ) ) {
+	    	    update_post_meta( $variation_id, '_wcev_external_status',  wc_clean( $_POST['_wcev_external_status'][ $variation_id ] ) );
 		}
 	    }
 	 
