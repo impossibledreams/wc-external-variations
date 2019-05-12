@@ -2,10 +2,10 @@
   * @description: This file is part of the WC External Variations plugin for Wordpress
   * @author: Impossible Dreams Network (https://web.impossibledreams.net)
   * @requires: jquery
-  * @version: 1.0.3
+  * @version: 1.0.4
   * @link: https://web.impossibledreams.net
   *
-  * @copyright: Copyright (c) 2018 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
+  * @copyright: Copyright (c) 2018-2019 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
   * @license: GNU General Public License v3.0
   */
 (function($){
