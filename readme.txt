@@ -5,7 +5,7 @@ Requires at least: 4.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.2.0
+Tested up to: 5.3.1
 Stable tag: trunk
 Requires PHP: 5.2.4
 
@@ -62,8 +62,11 @@ This version adds new shortcodes and removes the external sku shortcode.
 
 == Changelog ==
 
+= 1.0.5 =
+* Tested with Wordpress v5.3.1 and WooCommerce v3.8.1
+
 = 1.0.4 =
-* Tested with Wordpress 5.2, updated copyright dates
+* Tested with Wordpress v5.2, updated copyright dates
 
 = 1.0.3 =
 * Added shortcode for variation external status
