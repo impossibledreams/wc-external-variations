@@ -1,7 +1,6 @@
 === WC External Variations ===
 Contributors: impossibledreams, yakovsh
 Tags: woocommerce, external, variations, variable
-Requires at least: 4.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
@@ -15,7 +14,7 @@ A WordPress plugin that adds basic support for external products to WooCommerce 
 
 Adds basic support for external products to WooCommerce
 variations/variable products. This plugin allows you to define an external
-URL on any variation and will then open that link in a new window when the user
+URL on any variation and will then open that link when the user
 clicks on the *Add To Cart* button. Because the Javascript is used for this,
 any adding to cart that is done via the backend such as with APIs will not
 redirect properly.
