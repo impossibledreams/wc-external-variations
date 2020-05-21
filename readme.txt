@@ -56,9 +56,10 @@ plugin into the '/wp-content/plugins/' directory or upload it via the
 5. Save the product, view it, select the variation with the external URL and
 click on *Add to Cart*.
 6. A new window should open with the external URL.
+7. To change settings, go to WooCommerce Settings -> Products -> External Variations.
 
 == Upgrade Notice ==
-This version adds new shortcodes and removes the external sku shortcode.
+This update adds settings to control whether links open in the same or new tab.
 
 == Changelog ==
 
