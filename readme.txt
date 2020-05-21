@@ -5,7 +5,7 @@ Requires at least: 4.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.3.1
+Tested up to: 5.4.1
 Stable tag: trunk
 Requires PHP: 5.2.4
 
@@ -47,7 +47,7 @@ You can find this plugin at [WordPress.org](https://wordpress.org/plugins/wc-ext
 
 == Installation ==
 
-1. Make sure you are running WooCommerce v3.4 or higher.
+1. Make sure you are running WooCommerce v4.0 or higher.
 2. Either add the plugin via **Plugins &gt; Add New**, place the entire
 plugin into the '/wp-content/plugins/' directory or upload it via the
 **Plugins &gt; Upload section**.
@@ -61,6 +61,10 @@ click on *Add to Cart*.
 This version adds new shortcodes and removes the external sku shortcode.
 
 == Changelog ==
+
+= 1.0.6 =
+* Added settings option to control whether links open in the same or new tab
+* Tested with Wordpress v5.4.1 and WooCommerce v4.1.1
 
 = 1.0.5 =
 * Tested with Wordpress v5.3.1 and WooCommerce v3.8.1

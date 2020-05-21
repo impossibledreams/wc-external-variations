@@ -26,11 +26,15 @@
                     // Extra the variations data and parse into JSON
 		    var variationsData = $.parseJSON(rawData).find(x => x.variation_id === parseInt(variationId))
 
-		    // Get the URL, open in a new window, and clear out opener for security
+		    // Get the URL, open it and clear out opener for security (if needed)
 		    if (variationsData && variationsData._wcev_external_url) {
-		      var newWindow = window.open();
-		      newWindow.opener = null;
-		      newWindow.location = variationsData._wcev_external_url;
+		      if (variationsData._wcev_link_target && variationsData._wcev_link_target == 'same_window') {
+                window.location = variationsData._wcev_external_url;
+		      } else {
+                var newWindow = window.open();
+                newWindow.opener = null;
+                newWindow.location = variationsData._wcev_external_url;
+              }
 
 		      // Stop propogating events so the item doesn't get added to cart
 		      return false;
