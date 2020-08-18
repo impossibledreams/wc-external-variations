@@ -4,7 +4,7 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.4.1
+Tested up to: 5.5.0
 Stable tag: trunk
 Requires PHP: 5.2.4
 
@@ -61,6 +61,9 @@ click on *Add to Cart*.
 This update adds settings to control whether links open in the same or new tab.
 
 == Changelog ==
+
+= 1.0.7 =
+* Tested with Wordpress v5.5 and WooCommerce v4.4.0
 
 = 1.0.6 =
 * Added settings option to control whether links open in the same or new tab

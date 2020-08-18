@@ -2,7 +2,7 @@
   * @description: This file is part of the WC External Variations plugin for Wordpress
   * @author: Impossible Dreams Network (https://web.impossibledreams.net)
   * @requires: jquery
-  * @version: 1.0.6
+  * @version: 1.0.7
   * @link: https://web.impossibledreams.net
   *
   * @copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
