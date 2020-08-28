@@ -11,7 +11,7 @@
  * Contributors: impossibledreams, yakovsh
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 4.4.0
+ * WC tested up to: 4.4.1
  *
  * Copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0
@@ -102,6 +102,19 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                     ),
 
                     array(
+                        'id'       => 'wcev_add_to_cart_text',
+                        'type'     => 'text',
+                        'title'    => __( 'Text to the "Add to Cart" button', 'wcev-domain' ),
+                        'options'  => array(
+                            'new_window'  => __( 'New window/tab', 'wcev-domain' ),
+                            'same_window' => __( 'Same window/tab', 'wcev-domain' ),
+                        ),
+                        'default'  => '',
+                        'desc'     => __( 'Configures custom text for the "Add to Cart" button, leave empty not to override', 'wcev-domain' ),
+                        'desc_tip' => true,
+                    ),
+
+                    array(
                         'type'  => 'sectionend',
                         'id'    => 'external_variations_section',
                     ),
@@ -165,7 +178,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                         if ( !empty( $values ) ) {
 				foreach ( $values as $value ) {
 					$return .= $value;
-				}				
+				}
 			}
 		}
 
@@ -190,10 +203,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	     */
 	    function wcev_filter_show_fields( $loop, $variation_data, $variation ) {
 	       // Load and show the External URL field
-	       woocommerce_wp_text_input( 
-		array( 
-		    'id'          => '_wcev_external_url[' . $variation->ID . ']', 
-		    'label'       => __( 'External URL', 'woocommerce' ), 
+	       woocommerce_wp_text_input(
+		array(
+		    'id'          => '_wcev_external_url[' . $variation->ID . ']',
+		    'label'       => __( 'External URL', 'woocommerce' ),
 		    'placeholder' => 'https://',
 		    'desc_tip'    => 'true',
 		    'description' => __( 'Enter the URL of the external product.', 'woocommerce' ),
@@ -202,10 +215,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	       );
 
 	       // Load and show the External SKU field
-	       woocommerce_wp_text_input( 
-		array( 
-		    'id'          => '_wcev_external_sku[' . $variation->ID . ']', 
-		    'label'       => __( 'External SKU', 'wc-external-variations' ), 
+	       woocommerce_wp_text_input(
+		array(
+		    'id'          => '_wcev_external_sku[' . $variation->ID . ']',
+		    'label'       => __( 'External SKU', 'wc-external-variations' ),
 		    'placeholder' => '',
 		    'desc_tip'    => 'true',
 		    'description' => __( 'Enter the SKU of the external product', 'wc-external-variations' ),
@@ -214,16 +227,28 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	       );
 
 	       // Load and show the External Status field
-	       woocommerce_wp_text_input( 
-		array( 
-		    'id'          => '_wcev_external_status[' . $variation->ID . ']', 
-		    'label'       => __( 'External Status', 'wc-external-variations' ), 
+	       woocommerce_wp_text_input(
+		array(
+		    'id'          => '_wcev_external_status[' . $variation->ID . ']',
+		    'label'       => __( 'External Status', 'wc-external-variations' ),
 		    'placeholder' => '',
 		    'desc_tip'    => 'true',
 		    'description' => __( 'Enter the status of the external product', 'wc-external-variations' ),
 		    'value'       => get_post_meta( $variation->ID, '_wcev_external_status', true )
 		)
 	       );
+
+         // Load and show the "Add to Cart button text"
+         woocommerce_wp_text_input(
+    array(
+        'id'          => '_wcev_external_add_to_cart_text[' . $variation->ID . ']',
+        'label'       => __( 'External "Add To Cart" Text', 'wc-external-variations' ),
+        'placeholder' => '',
+        'desc_tip'    => 'true',
+        'description' => __( 'Enter the text for the "Add to Cart Button"', 'wc-external-variations' ),
+        'value'       => get_post_meta( $variation->ID, '_wcev_external_add_to_cart_text', true )
+    )
+         );
 	    }
 
 	    /**
@@ -244,8 +269,13 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		if ( isset( $_POST['_wcev_external_status'][ $variation_id ] ) ) {
 	    	    update_post_meta( $variation_id, '_wcev_external_status',  wc_clean( $_POST['_wcev_external_status'][ $variation_id ] ) );
 		}
+
+    // Save the External Add To Cart text field
+		if ( isset( $_POST['_wcev_external_add_to_cart_text'][ $variation_id ] ) ) {
+	    	    update_post_meta( $variation_id, '_wcev_external_add_to_cart_text',  wc_clean( $_POST['_wcev_external_add_to_cart_text'][ $variation_id ] ) );
+		}
 	    }
-	 
+
 	    /**
 	      * Function to load the external URL into the front end HTML so the Javascript interceptor can find it and use it
 	      * Also provides shortcode support for the external URL which can be used to set standard links across the installation.
@@ -264,6 +294,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
                 // Set setting fields
                 $data['_wcev_link_target']  = WC_Admin_Settings::get_option('wcev_links_target', 'new_window');
+
+                // Set 'add to cart' button text
+                $settings_text = WC_Admin_Settings::get_option('wcev_add_to_cart_text', '');
+                $data_text = sanitize_text_field( get_post_meta( $variation->get_id(), '_wcev_external_add_to_cart_text', true ) );
+                $data['_wcev_add_to_cart_text']  = !empty( $data_text ) ? $data_text : $settings_text;
 		    }
 
             // Unset the global variable used for shortcodes
@@ -271,7 +306,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
             // Return data for the frond end
             return $data;
-	    } 
+	    }
 
 	     /**
 	      * This function loads Javascript files for this plugin which do the actual interception of the Add To Cart clicks
