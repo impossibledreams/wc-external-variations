@@ -2,7 +2,7 @@
   * @description: This file is part of the WC External Variations plugin for Wordpress
   * @author: Impossible Dreams Network (https://web.impossibledreams.net)
   * @requires: jquery
-  * @version: 1.0.6
+  * @version: 1.0.7
   * @link: https://web.impossibledreams.net
   *
   * @copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
@@ -10,6 +10,34 @@
   */
 (function($){
   $(document).ready(function(){
+    // Change button text back when variations are reset
+    $('.variations_form').on('reset_data', function ( event ) {
+        if (this.dataset.old_add_to_cart_text) {
+           var add_to_cart_button = $(this).find('.single_add_to_cart_button')[0];
+           add_to_cart_button.textContent = this.dataset.old_add_to_cart_text;
+        }
+    });
+
+    // Hook onto 'show_variation' in order to change the 'Add to Cart' button
+    $('.variations_form').on("show_variation", function ( event, variation ) {
+      var add_to_cart_button = $(this).find('.single_add_to_cart_button')[0];
+
+      if (variation._wcev_add_to_cart_text) {
+        // Save old button text before setting the new one
+        if (!this.dataset.old_add_to_cart_text) {
+           this.dataset.old_add_to_cart_text = add_to_cart_button.textContent;
+        }
+
+        // Set the button text if needed
+        add_to_cart_button.textContent = variation._wcev_add_to_cart_text;
+      } else {
+        // Check if old cart text is saved, then reset. This is for an edge case when button text isn't set for one variation.
+        if (this.dataset.old_add_to_cart_text) {
+          add_to_cart_button.textContent = this.dataset.old_add_to_cart_text;
+        }
+      }
+    });
+
     // Hook custom event on the 'Add to Cart' button in WooCommerce, for variations only
     $('.woocommerce-variation-add-to-cart .single_add_to_cart_button').click(function(event) {
       // Error handling in case there is an issue with the URL

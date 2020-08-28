@@ -4,7 +4,7 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.4.1
+Tested up to: 5.5.0
 Stable tag: trunk
 Requires PHP: 5.2.4
 
@@ -33,11 +33,19 @@ set this field and then use the provided shortcode to display it. The purpose is
 
 There is also an external status field for tracking things like stock status separately from internal WooCommerce functionality.
 
+There is now ability to specify the 'Add to Button' text in a specific variation. If the global setting is set, the variation-specific field will override it.
+
+= Settings =
+To change settings, go to WooCommerce Settings -> Products -> External Variations.
+The following are available:
+* Ability to change if links open in new or same window
+* Ability to override the 'Add to Button' text for all external variations
+
 = More Details =
 
 Please note that this plugin has only been tested in a vanilla WordPress / WooCommerce
 installation without any other plugins. If you have other plugins that modify
-the functionality of the *Add to Cart* button, this plugin may not work or 
+the functionality of the *Add to Cart* button, this plugin may not work or
 cause unintended consequences.
 
 Development of this plugin is done at [Github](https://github.com/impossibledreams/wc-external-variations)
@@ -62,8 +70,12 @@ This update adds settings to control whether links open in the same or new tab.
 
 == Changelog ==
 
+= 1.0.7 =
+* Tested with Wordpress v5.5 and WooCommerce v4.4.1
+* Added ability to change the 'Add to Cart' text on global and variation-specific basis (#3).
+
 = 1.0.6 =
-* Added settings option to control whether links open in the same or new tab
+* Added settings option to control whether links open in the same or new tab (#4).
 * Tested with Wordpress v5.4.1 and WooCommerce v4.1.1
 
 = 1.0.5 =
