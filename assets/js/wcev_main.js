@@ -2,7 +2,7 @@
   * @description: This file is part of the WC External Variations plugin for Wordpress
   * @author: Impossible Dreams Network (https://web.impossibledreams.net)
   * @requires: jquery
-  * @version: 1.0.7
+  * @version: 1.0.8
   * @link: https://web.impossibledreams.net
   *
   * @copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
@@ -11,7 +11,7 @@
 (function($){
   $(document).ready(function(){
     // Change button text back when variations are reset
-    $('.variations_form').on('reset_data', function ( event ) {
+    $('body').on('reset_data', '.variations_form', function ( event ) {
         if (this.dataset.old_add_to_cart_text) {
            var add_to_cart_button = $(this).find('.single_add_to_cart_button')[0];
            add_to_cart_button.textContent = this.dataset.old_add_to_cart_text;
@@ -19,7 +19,7 @@
     });
 
     // Hook onto 'show_variation' in order to change the 'Add to Cart' button
-    $('.variations_form').on("show_variation", function ( event, variation ) {
+    $('body').on('show_variation', '.variations_form', function ( event, variation ) {
       var add_to_cart_button = $(this).find('.single_add_to_cart_button')[0];
 
       if (variation._wcev_add_to_cart_text) {
@@ -39,7 +39,7 @@
     });
 
     // Hook custom event on the 'Add to Cart' button in WooCommerce, for variations only
-    $('.woocommerce-variation-add-to-cart .single_add_to_cart_button').click(function(event) {
+    $('body').on('click', '.variations_form .single_add_to_cart_button', function ( event, variation ) {
       // Error handling in case there is an issue with the URL
       try {
 	    // Check if 'Add to Cart' button is still disabled, that means the variation has not been selected yet
