@@ -74,7 +74,7 @@ This update adds settings to control whether links open in the same or new tab.
 == Changelog ==
 
 = 1.0.8 =
-* Refactored Javascript code to fix issues with quick view plugins and themes..
+* Refactored Javascript code to fix issues with quick view plugins and themes (#9)
 * Added donation link
 
 = 1.0.7 =
