@@ -1,5 +1,6 @@
 === WC External Variations ===
 Contributors: impossibledreams, yakovsh
+Donate link: https://www.paypal.com/biz/fund?id=8JX776MCWU338
 Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -52,6 +53,8 @@ Development of this plugin is done at [Github](https://github.com/impossibledrea
 
 You can find this plugin at [WordPress.org](https://wordpress.org/plugins/wc-external-variations/)
 
+You can make a donation to support this project [here](https://www.paypal.com/biz/fund?id=8JX776MCWU338)
+
 == Installation ==
 
 1. Make sure you are running WooCommerce v4.0 or higher.
@@ -72,6 +75,7 @@ This update adds settings to control whether links open in the same or new tab.
 
 = 1.0.8 =
 * Refactored Javascript code to fix issues with quick view plugins and themes..
+* Added donation link
 
 = 1.0.7 =
 * Tested with Wordpress v5.5 and WooCommerce v4.4.1
