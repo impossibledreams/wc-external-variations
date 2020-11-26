@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC External Variations
  * Plugin URI: https://github.com/impossibledreams/wc-external-variations
- * Version: 1.0.8
+ * Version: 1.0.9
  *
  * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
@@ -11,7 +11,7 @@
  * Contributors: impossibledreams, yakovsh
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 4.4.1
+ * WC tested up to: 4.7.1
  *
  * Copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0
@@ -289,8 +289,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 // Process shortcodes
                 $external_url = do_shortcode( $external_url);
 
-                // Set the field to be returned to the front end, with sanitizing
-                $data['_wcev_external_url']  = esc_url( $external_url );
+                // Set the field to be returned to the front end
+                $data['_wcev_external_url']  = $external_url;
 
                 // Set setting fields
                 $data['_wcev_link_target']  = WC_Admin_Settings::get_option('wcev_links_target', 'new_window');
