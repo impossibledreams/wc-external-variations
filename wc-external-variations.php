@@ -97,7 +97,20 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                             'same_window' => __( 'Same window/tab', 'wcev-domain' ),
                         ),
                         'default'  => 'new_window',
-                        'desc'     => __( 'Configures whether links to external variations open in a new or existing window', 'wcev-domain' ),
+                        'desc'     => __( 'Configures whether external links open in a new or existing window', 'wcev-domain' ),
+                        'desc_tip' => true,
+                    ),
+
+                    array(
+                        'id'       => 'wcev_links_trigger',
+                        'type'     => 'radio',
+                        'title'    => __( 'Open links when', 'wcev-domain' ),
+                        'options'  => array(
+                            'cart_button_selected'  => __( 'The Add to Cart button is selected', 'wcev-domain' ),
+                            'variation_selected'    => __( 'When the variation is selected', 'wcev-domain' ),
+                        ),
+                        'default'  => 'cart_button_selected',
+                        'desc'     => __( 'Configures what action triggers the opening of external links', 'wcev-domain' ),
                         'desc_tip' => true,
                     ),
 
@@ -257,7 +270,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	    function wcev_filter_save_fields( $variation_id, $i ) {
 		// Save the External URL field
 		if ( isset( $_POST['_wcev_external_url'][ $variation_id ] ) ) {
-	    	    update_post_meta( $variation_id, '_wcev_external_url',  wc_clean( $_POST['_wcev_external_url'][ $variation_id ] ) );
+	    	    update_post_meta( $variation_id, '_wcev_external_url',  esc_url_raw( wp_unslash( $_POST['_wcev_external_url'][ $variation_id ] ) ) );
 		}
 
 		// Save the External SKU field
@@ -270,7 +283,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	    	    update_post_meta( $variation_id, '_wcev_external_status',  wc_clean( $_POST['_wcev_external_status'][ $variation_id ] ) );
 		}
 
-    // Save the External Add To Cart text field
+		// Save the External Add To Cart text field
 		if ( isset( $_POST['_wcev_external_add_to_cart_text'][ $variation_id ] ) ) {
 	    	    update_post_meta( $variation_id, '_wcev_external_add_to_cart_text',  wc_clean( $_POST['_wcev_external_add_to_cart_text'][ $variation_id ] ) );
 		}
@@ -293,7 +306,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                 $data['_wcev_external_url']  = $external_url;
 
                 // Set setting fields
-                $data['_wcev_link_target']  = WC_Admin_Settings::get_option('wcev_links_target', 'new_window');
+                $data['_wcev_links_target']   = WC_Admin_Settings::get_option('wcev_links_target',  'new_window');
+                $data['_wcev_links_trigger']  = WC_Admin_Settings::get_option('wcev_links_trigger', 'cart_button_selected');
 
                 // Set 'add to cart' button text
                 $settings_text = WC_Admin_Settings::get_option('wcev_add_to_cart_text', '');

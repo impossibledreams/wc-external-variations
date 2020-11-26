@@ -32,15 +32,14 @@ This plugin provides two shortcodes that you can use within your site:
 In addition to the external URL field, a second field called "External SKU" is provided for each variation. You can
 set this field and then use the provided shortcode to display it. The purpose is to track the external SKU separately from the internal one.
 
-There is also an external status field for tracking things like stock status separately from internal WooCommerce functionality.
-
 There is now ability to specify the 'Add to Button' text in a specific variation. If the global setting is set, the variation-specific field will override it.
 
 = Settings =
 To change settings, go to WooCommerce Settings -> Products -> External Variations.
 The following are available:
 * Ability to change if links open in new or same window
-* Ability to override the 'Add to Button' text for all external variations
+* Ability to change if links open when the 'Add to Cart' button is clicked or when the variation is selected
+* Ability to override the 'Add to Cart' button text for all external variations
 
 = More Details =
 
@@ -74,7 +73,8 @@ This update adds settings to control whether links open in the same or new tab.
 == Changelog ==
 
 = 1.0.9 =
-* Fixed encodeding/decoding in the external URL
+* Fixed encoding/decoding in the external URL
+* Added a setting to open external link when the variation is selected
 
 = 1.0.8 =
 * Refactored Javascript code to fix issues with quick view plugins and themes (#9)

@@ -36,6 +36,11 @@
           add_to_cart_button.textContent = this.dataset.old_add_to_cart_text;
         }
       }
+
+      // Trigger the button if the right target setting is present
+      if (!add_to_cart_button.classList.contains('disabled') && variation._wcev_external_url && variation._wcev_links_trigger && variation._wcev_links_trigger == 'variation_selected') {
+        add_to_cart_button.click();
+      }
     });
 
     // Hook custom event on the 'Add to Cart' button in WooCommerce, for variations only
@@ -51,17 +56,21 @@
 
 		// Find the URL for the external product
 		if (variationId && rawData) {
-                    // Extra the variations data and parse into JSON
+        // Extract the variations data and parse into JSON
 		    var variationsData = $.parseJSON(rawData).find(x => x.variation_id === parseInt(variationId))
 
 		    // Get the URL, open it and clear out opener for security (if needed)
 		    if (variationsData && variationsData._wcev_external_url) {
-		      if (variationsData._wcev_link_target && variationsData._wcev_link_target == 'same_window') {
+		      if (variationsData._wcev_links_target && variationsData._wcev_links_target == 'same_window') {
                 window.location = variationsData._wcev_external_url;
 		      } else {
                 var newWindow = window.open();
-                newWindow.opener = null;
-                newWindow.location = variationsData._wcev_external_url;
+                if (newWindow) {
+                  newWindow.opener = null;
+                  newWindow.location = variationsData._wcev_external_url;
+                } else {
+                  alert('WC External Variations: Unable to open a new window, check your popup blocker settings!');
+                }
               }
 
 		      // Stop propogating events so the item doesn't get added to cart
@@ -70,10 +79,13 @@
 		}
 	    }
       } catch (error) {
-	alert('WC External Variations: An error has occured, see console');
+	      alert('WC External Variations: An error has occured, see console');
         if (console) {
 	    console.error(error);
         }
+
+        // Stop event propogation in case of an error, this avoid the code going around in circles
+        return false;
       }
 
       // Otherwise, continue event propogation so normal WooCommerce processing continues
