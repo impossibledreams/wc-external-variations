@@ -68,12 +68,12 @@ click on *Add to Cart*.
 7. To change settings, go to WooCommerce Settings -> Products -> External Variations.
 
 == Upgrade Notice ==
-This update adds settings to control whether links open in the same or new tab.
+This upgrade includes minor bug fixes, no changes in functionality
 
 == Changelog ==
 
 = 1.0.10 =
-* Fixed conflict with Product Bundles extension
+* Fixed conflict with the Product Bundles extension
 
 = 1.0.9 =
 * Fixed encoding/decoding in the external URL
