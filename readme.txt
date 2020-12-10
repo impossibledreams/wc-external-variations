@@ -5,7 +5,7 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.5.3
+Tested up to: 5.6.0
 Stable tag: trunk
 Requires PHP: 5.2.4
 
@@ -71,6 +71,9 @@ click on *Add to Cart*.
 This update adds settings to control whether links open in the same or new tab.
 
 == Changelog ==
+
+= 1.0.10 =
+* Fixed conflict with Product Bundles extension
 
 = 1.0.9 =
 * Fixed encoding/decoding in the external URL

@@ -2,7 +2,7 @@
   * @description: This file is part of the WC External Variations plugin for Wordpress
   * @author: Impossible Dreams Network (https://web.impossibledreams.net)
   * @requires: jquery
-  * @version: 1.0.9
+  * @version: 1.0.10
   * @link: https://web.impossibledreams.net
   *
   * @copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
@@ -21,6 +21,11 @@
     // Hook onto 'show_variation' in order to change the 'Add to Cart' button
     $('body').on('show_variation', '.variations_form', function ( event, variation ) {
       var add_to_cart_button = $(this).find('.single_add_to_cart_button')[0];
+
+      // Make sure we can find the button
+      if (!add_to_cart_button) {
+        return;
+      }
 
       if (variation._wcev_add_to_cart_text) {
         // Save old button text before setting the new one
@@ -56,13 +61,13 @@
 
 		// Find the URL for the external product
 		if (variationId && rawData) {
-        // Extract the variations data and parse into JSON
+		    // Extract the variations data and parse into JSON
 		    var variationsData = $.parseJSON(rawData).find(x => x.variation_id === parseInt(variationId))
 
 		    // Get the URL, open it and clear out opener for security (if needed)
 		    if (variationsData && variationsData._wcev_external_url) {
 		      if (variationsData._wcev_links_target && variationsData._wcev_links_target == 'same_window') {
-                window.location = variationsData._wcev_external_url;
+            		window.location = variationsData._wcev_external_url;
 		      } else {
                 var newWindow = window.open();
                 if (newWindow) {
