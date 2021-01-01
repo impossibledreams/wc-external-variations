@@ -12,7 +12,6 @@ Requires PHP: 5.2.4
 A WordPress plugin that adds basic support for external products to WooCommerce variations/variable products
 
 == Description ==
-
 Adds basic support for external products to WooCommerce
 variations/variable products. This plugin allows you to define an external
 URL on any variation and will then open that link when the user
@@ -24,25 +23,24 @@ redirect properly.
 
 This plugin provides two shortcodes that you can use within your site:
 1. [wcev_product_attr] - allows you to display an product attribute, use the "name" attribute to find the right attribute.
-2. [wcev_var_field] - allows you to display a custom field for a variation, use the "id" attribute to point to the right field.
+2. [wcev_var_field] - allows you to display a custom field, attribute or data element for a variation, use the "id" attribute to point to the right field.
+The order of precendence is as follows: custom fields, attributes, then data elements.
 3. [wcev_var_postdate] - displays the formatted post date and time for a variation, doesn't take attributes.
 
 = External SKU and status fields =
-
-In addition to the external URL field, a second field called "External SKU" is provided for each variation. You can
-set this field and then use the provided shortcode to display it. The purpose is to track the external SKU separately from the internal one.
+In addition to the external URL field, a second field called "External SKU" is provided for each variation.
+You can set this field and then use the provided shortcode to display it.
+The purpose is to track the external SKU separately from the internal one.
 
 There is now ability to specify the 'Add to Button' text in a specific variation. If the global setting is set, the variation-specific field will override it.
 
 = Settings =
-To change settings, go to WooCommerce Settings -> Products -> External Variations.
-The following are available:
+To change settings, go to WooCommerce Settings -> Products -> External Variations. The following are available:
 * Ability to change if links open in new or same window
 * Ability to change if links open when the 'Add to Cart' button is clicked or when the variation is selected
 * Ability to override the 'Add to Cart' button text for all external variations
 
 = More Details =
-
 Please note that this plugin has only been tested in a vanilla WordPress / WooCommerce
 installation without any other plugins. If you have other plugins that modify
 the functionality of the *Add to Cart* button, this plugin may not work or
@@ -68,9 +66,12 @@ click on *Add to Cart*.
 7. To change settings, go to WooCommerce Settings -> Products -> External Variations.
 
 == Upgrade Notice ==
-This upgrade includes minor bug fixes, no changes in functionality
+Added ability to retrieve variation attributes and data elements within the "[wcev_var_field]" shortcode.
 
 == Changelog ==
+
+= 1.0.11 =
+* Added ability to retrieve variation attributes and data elements within the "[wcev_var_field]" shortcode.
 
 = 1.0.10 =
 * Fixed conflict with the Product Bundles extension

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC External Variations
  * Plugin URI: https://github.com/impossibledreams/wc-external-variations
- * Version: 1.0.10
+ * Version: 1.0.11
  *
  * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
@@ -13,7 +13,7 @@
  * WC requires at least: 4.0.0
  * WC tested up to: 4.8.0
  *
- * Copyright: Copyright (c) 2018-2020 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
+ * Copyright: Copyright (c) 2018-2021 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -46,7 +46,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	    public function init() {
             // Adds shortcodes
             add_shortcode('wcev_product_attr', 	array( $this, 'wcev_product_getattribute_shortcode') );
-            add_shortcode('wcev_var_field',  	array( $this, 'wcev_variation_customfield_shortcode') );
+            add_shortcode('wcev_var_field',  	array( $this, 'wcev_variation_field_shortcode') );
             add_shortcode('wcev_var_postdate',  array( $this, 'wcev_variation_postdate_shortcode') );
 
             // Hooks into the product editing code so custom fields can be shown and saved in the editor
@@ -164,7 +164,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
             global $product;
             if ( isset( $product ) and !empty( $field_name ) ) {
                 $value = $product->get_attribute( $field_name );
-                            if ( !empty( $value ) ) {
+                if ( !empty( $value ) ) {
                     $return = $value;
                 }
             }
@@ -174,9 +174,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	    }
 
 	    /**
-      	     * Shortcode function to retrieve and show a custom field for a variation.
+      	     * Shortcode function to retrieve and show a custom field, attribute or data element for a variation.
 	     */
-	    function wcev_variation_customfield_shortcode( $atts, $content = null ) {
+	    function wcev_variation_field_shortcode( $atts, $content = null ) {
 		// Parse the shortcode attributes
 		$atts = shortcode_atts( array('id' => '', ), $atts, 'wcev_var_field' );
 		$id = $atts['id'];
@@ -184,8 +184,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		// Default return value is empty
 		$return = '';
 
-		// Try to get the attribute and return
+		// Try to get the custom fields and return
 		global $wcev_variation_id;
+		$variation = wc_get_product( $wcev_variation_id );
 		if ( isset( $wcev_variation_id ) and !empty( $id ) ) {
 			$values = get_post_meta( $wcev_variation_id, $id );
                         if ( !empty( $values ) ) {
@@ -193,6 +194,25 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					$return .= $value;
 				}
 			}
+			
+			// Try attributes next
+			if ( empty($return) ) {
+    	        		$value = $variation->get_attribute( $id );
+        	    		if ( !empty( $value ) ) {
+            			    $return = $value;
+	            		}
+	            	}
+	                
+	                // Try data elements last
+			if ( empty($return) ) {
+    	        		$data = $variation->get_data();
+        	    		if ( array_key_exists($id, $data) ) {
+            			    $value = $data[ $id ];
+            			    if ( !is_array($value) and !is_object($value) and !is_resource($value) ) { 
+	            			$return = $value;
+	            		    }
+	            		}
+	            	}
 		}
 
 		// Return value
