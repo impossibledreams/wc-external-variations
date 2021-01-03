@@ -52,16 +52,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
             // Hooks into the product editing code so custom fields can be shown and saved in the editor
             add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'wcev_filter_show_fields'), 10, 3 );
             add_action( 'woocommerce_save_product_variation',            array( $this, 'wcev_filter_save_fields'), 10, 2 );
-
-            // Hooks into the user-facing code so the add to cart clicks can be redirected to external links in the front end
-            add_filter( 'woocommerce_available_variation',               array( $this, 'wcev_filter_add_variation_data'), 10, 3 );
-
             // Loads Javascript for the front end code.
             add_action( 'wp_enqueue_scripts',                            array( $this, 'wcev_load_scripts') );
 
+            // Hooks into the user-facing code so the add to cart clicks can be redirected to external links in the front end
+            add_filter( 'woocommerce_available_variation',               array( $this, 'wcev_filter_add_variation_data'), 10, 3 );
+            // Hook to prevent external variations from being added to the cart (in case JavaScript fails)
+            add_filter( 'woocommerce_add_to_cart_validation',            array( $this, 'wcev_filter_cart_validation'), 10, 4 );
             // This filter is used to remember the variation ID being processed, and is unhooked in woocommerce_product_after_variable_attributes
             add_filter( 'woocommerce_show_variation_price', 	     array( $this, 'wcev_filter_remember_variation_id'), 10, 3 );
-
 	        // Add settings
 	        add_filter( 'woocommerce_get_sections_products', array( $this, 'wcev_filter_add_settings_section') );
 	        add_filter( 'woocommerce_get_settings_products', array( $this, 'wcev_filter_add_settings_details'), 10, 2 );
@@ -150,7 +149,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         }
 
 	    /**
-      	 * Shortcode function to retrieve and show an attribute for a WooCommerce product.
+      	     * Shortcode function to retrieve and show an attribute for a WooCommerce product.
 	     */
 	    function wcev_product_getattribute_shortcode( $atts, $content = null ) {
             // Parse the shortcode attributes
@@ -251,10 +250,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	       woocommerce_wp_text_input(
 		array(
 		    'id'          => '_wcev_external_sku[' . $variation->ID . ']',
-		    'label'       => __( 'External SKU', 'wc-external-variations' ),
+		    'label'       => __( 'External SKU', 'wcev-domain' ),
 		    'placeholder' => '',
 		    'desc_tip'    => 'true',
-		    'description' => __( 'Enter the SKU of the external product', 'wc-external-variations' ),
+		    'description' => __( 'Enter the SKU of the external product', 'wcev-domain' ),
 		    'value'       => get_post_meta( $variation->ID, '_wcev_external_sku', true )
 		)
 	       );
@@ -263,10 +262,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	       woocommerce_wp_text_input(
 		array(
 		    'id'          => '_wcev_external_status[' . $variation->ID . ']',
-		    'label'       => __( 'External Status', 'wc-external-variations' ),
+		    'label'       => __( 'External Status', 'wcev-domain' ),
 		    'placeholder' => '',
 		    'desc_tip'    => 'true',
-		    'description' => __( 'Enter the status of the external product', 'wc-external-variations' ),
+		    'description' => __( 'Enter the status of the external product', 'wcev-domain' ),
 		    'value'       => get_post_meta( $variation->ID, '_wcev_external_status', true )
 		)
 	       );
@@ -275,10 +274,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
          woocommerce_wp_text_input(
     array(
         'id'          => '_wcev_external_add_to_cart_text[' . $variation->ID . ']',
-        'label'       => __( 'External "Add To Cart" Text', 'wc-external-variations' ),
+        'label'       => __( 'External "Add To Cart" Text', 'wcev-domain' ),
         'placeholder' => '',
         'desc_tip'    => 'true',
-        'description' => __( 'Enter the text for the "Add to Cart Button"', 'wc-external-variations' ),
+        'description' => __( 'Enter the text for the "Add to Cart Button"', 'wcev-domain' ),
         'value'       => get_post_meta( $variation->ID, '_wcev_external_add_to_cart_text', true )
     )
          );
@@ -340,6 +339,21 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
             // Return data for the frond end
             return $data;
+	    }
+
+	    /**
+	      * Function to prevent external variations from being added to the cart if the frontend Javascript code fails
+	      */
+	    function wcev_filter_cart_validation( $passed, $product_id, $quantity, $variation_id = 0 ) {
+	        // If variation_id is set, check if external_url is set, and do not add
+	        if ( $variation_id > 0 ) {
+                   $external_url = get_post_meta( $variation_id, '_wcev_external_url', true );
+                   if ( isset( $external_url ) ) {
+                      wc_add_notice( __( 'External variations cannot be added to the cart.', 'wcev-domain' ), 'error' );
+                      $passed = false;
+                   }
+	        }
+	        return $passed;
 	    }
 
 	     /**
