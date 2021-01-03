@@ -348,7 +348,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	        // If variation_id is set, check if external_url is set, and do not add
 	        if ( $variation_id > 0 ) {
                    $external_url = get_post_meta( $variation_id, '_wcev_external_url', true );
-                   if ( isset( $external_url ) ) {
+                   if ( isset( $external_url ) and !empty( $external_url) ) {
                       wc_add_notice( __( 'External variations cannot be added to the cart.', 'wcev-domain' ), 'error' );
                       $passed = false;
                    }
