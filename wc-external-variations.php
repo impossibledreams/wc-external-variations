@@ -289,7 +289,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	    function wcev_filter_save_fields( $variation_id, $i ) {
 		// Save the External URL field
 		if ( isset( $_POST['_wcev_external_url'][ $variation_id ] ) ) {
-	    	    update_post_meta( $variation_id, '_wcev_external_url',  esc_url_raw( wp_unslash( $_POST['_wcev_external_url'][ $variation_id ] ) ) );
+	    	    update_post_meta( $variation_id, '_wcev_external_url',  wc_clean( $_POST['_wcev_external_url'][ $variation_id ] ) );
 		}
 
 		// Save the External SKU field
