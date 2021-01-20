@@ -70,6 +70,8 @@ Added ability to retrieve variation attributes and data elements within the "[wc
 Added a check to make sure external variations cannot be added to the cart if Javascript fails.
 
 == Changelog ==
+= 1.0.12 =
+* Minor bug fixes
 
 = 1.0.11 =
 * Added ability to retrieve variation attributes and data elements within the "[wcev_var_field]" shortcode.
