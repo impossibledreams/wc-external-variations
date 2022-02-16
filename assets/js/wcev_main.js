@@ -5,7 +5,7 @@
   * @version: 1.0.12
   * @link: https://web.impossibledreams.net
   *
-  * @copyright: Copyright (c) 2018-2021 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
+  * @copyright: Copyright (c) 2018-2022 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
   * @license: GNU General Public License v3.0
   */
 (function($){

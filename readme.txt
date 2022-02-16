@@ -5,7 +5,7 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.6.0
+Tested up to: 5.9.0
 Stable tag: trunk
 Requires PHP: 5.2.4
 
@@ -77,6 +77,7 @@ https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-d
 == Changelog ==
 = 1.0.12 =
 * Minor bug fixes
+* Fixed issue with imports and ampresands
 
 = 1.0.11 =
 * Added ability to retrieve variation attributes and data elements within the "[wcev_var_field]" shortcode.

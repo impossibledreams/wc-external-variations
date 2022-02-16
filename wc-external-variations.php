@@ -11,9 +11,9 @@
  * Contributors: impossibledreams, yakovsh
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 4.9.1
+ * WC tested up to: 6.2.0
  *
- * Copyright: Copyright (c) 2018-2021 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
+ * Copyright: Copyright (c) 2018-2022 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -64,6 +64,26 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	        // Add settings
 	        add_filter( 'woocommerce_get_sections_products', array( $this, 'wcev_filter_add_settings_section') );
 	        add_filter( 'woocommerce_get_settings_products', array( $this, 'wcev_filter_add_settings_details'), 10, 2 );
+
+			// Adds a filter for imports, fixes an issue with some URLs being escaped incorrectly
+			add_filter( 'woocommerce_product_import_pre_insert_product_object', array( $this, 'wcev_filter_pre_insert'), 10, 2 );
+	    }
+
+	    /**
+	     * Handles file imports, fixes an issue with some URLs being escaped incorrectly due to wp_filter_kses() being used for meta
+		 * 
+		 * @param WC_Product $object - Product being imported or updated.
+         * @param array $data - CSV data read for the product.
+         * @return WC_Product $object
+	     */
+        function wcev_filter_pre_insert( $object, $data ) {
+			$column_name = '_wcev_external_url';
+
+			$imported_url = $object->get_meta( $column_name );
+			if ( ! empty( $imported_url ) ) {
+				$object->update_meta_data( $column_name, str_replace( '&amp;', '&', $imported_url) );
+			}
+			return $object;
 	    }
 
 	    /**
