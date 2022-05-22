@@ -66,9 +66,7 @@ click on *Add to Cart*.
 7. To change settings, go to WooCommerce Settings -> Products -> External Variations.
 
 == Upgrade Notice ==
-Added ability to retrieve variation attributes and data elements within the "[wcev_var_field]" shortcode.
-Added a check to make sure external variations cannot be added to the cart if Javascript fails.
-Fixed issue with imports and ampresands
+TBD
 
 == Known Issues ==
 When the number of variations exceeds 30, the plugin stops working. This is due
@@ -76,6 +74,9 @@ to a WooCommerce limit and can be bypassed by using a filter as described here:
 https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-dynamic-variable-product-dropdowns/
 
 == Changelog ==
+= 1.0.13 =
+* TBD
+
 = 1.0.12 =
 * Minor bug fixes
 * Fixed issue with imports and ampresands
