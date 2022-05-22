@@ -11,7 +11,7 @@
  * Contributors: impossibledreams, yakovsh
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 6.2.0
+ * WC tested up to: 6.5.1
  *
  * Copyright: Copyright (c) 2018-2022 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0

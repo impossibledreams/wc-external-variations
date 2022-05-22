@@ -5,9 +5,9 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.9.0
+Tested up to: 5.9.3
 Stable tag: trunk
-Requires PHP: 5.2.4
+Requires PHP: 5.6.0
 
 A WordPress plugin that adds basic support for external products to WooCommerce variations/variable products
 
@@ -68,6 +68,7 @@ click on *Add to Cart*.
 == Upgrade Notice ==
 Added ability to retrieve variation attributes and data elements within the "[wcev_var_field]" shortcode.
 Added a check to make sure external variations cannot be added to the cart if Javascript fails.
+Fixed issue with imports and ampresands
 
 == Known Issues ==
 When the number of variations exceeds 30, the plugin stops working. This is due
