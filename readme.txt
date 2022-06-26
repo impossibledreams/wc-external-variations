@@ -75,7 +75,7 @@ https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-d
 
 == Changelog ==
 = 1.0.13 =
-* TBD
+* Fix for URLs with escaped characters
 
 = 1.0.12 =
 * Minor bug fixes
