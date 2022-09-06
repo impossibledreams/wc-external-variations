@@ -74,6 +74,9 @@ to a WooCommerce limit and can be bypassed by using a filter as described here:
 https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-dynamic-variable-product-dropdowns/
 
 == Changelog ==
+= 1.0.14 =
+* TBD
+
 = 1.0.13 =
 * Fix for URLs with escaped characters
 
