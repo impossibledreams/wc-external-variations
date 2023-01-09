@@ -5,7 +5,7 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 5.9.3
+Tested up to: 6.1.1
 Stable tag: trunk
 Requires PHP: 5.6.0
 
