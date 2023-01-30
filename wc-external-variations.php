@@ -37,6 +37,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	     * Constructor for the class, runs when the class is instantiated
 	     */
 	    public function __construct() {
+			// Declare compatibility with HCOT / HPOS
+			add_action(
+				'before_woocommerce_init',
+				function() {
+					if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+						\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+					}
+				}
+			);
+
 			// Hooks into the WooCommerce initialize hook, so code in this class gets initialized after WooCommerce
 			add_action( 'woocommerce_init', array( $this, 'init' ) );
 	    }
@@ -45,13 +55,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	     * Runs whatever code needs to be initialized after WooCommerce has loaded
 	     */
 	    public function init() {
-			// Declare compatibility with HCOT / HPOS
-			add_action( 'before_woocommerce_init', function() {
-				if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-					FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
-				}
-			} );
-
             // Adds shortcodes
             add_shortcode('wcev_product_attr', 	array( $this, 'wcev_product_getattribute_shortcode') );
             add_shortcode('wcev_var_field',  	array( $this, 'wcev_variation_field_shortcode') );
