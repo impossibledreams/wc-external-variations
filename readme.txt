@@ -74,6 +74,9 @@ to a WooCommerce limit and can be bypassed by using a filter as described here:
 https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-dynamic-variable-product-dropdowns/
 
 == Changelog ==
+= 1.0.15 =
+* Reverting 1.0.14 changes due to fatal errors
+
 = 1.0.14 =
 * Added support for HPOS
 * Added note about no more active development
