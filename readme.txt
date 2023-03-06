@@ -1,6 +1,5 @@
 === WC External Variations ===
 Contributors: impossibledreams, yakovsh
-Donate link: https://www.paypal.com/biz/fund?id=8JX776MCWU338
 Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -9,7 +8,8 @@ Tested up to: 6.1.1
 Stable tag: trunk
 Requires PHP: 5.6.0
 
-A WordPress plugin that adds basic support for external products to WooCommerce variations/variable products
+A WordPress plugin that adds basic support for external products to WooCommerce variations/variable products.
+No longer under active development as of 03/2023.
 
 == Description ==
 Adds basic support for external products to WooCommerce
@@ -18,6 +18,8 @@ URL on any variation and will then open that link when the user
 clicks on the *Add To Cart* button. Because the Javascript is used for this,
 any adding to cart that is done via the backend such as with APIs will not
 redirect properly.
+
+Note that as of 03/2023 this plugin is not longer under active development.
 
 = Shortcode support  =
 
@@ -46,11 +48,9 @@ installation without any other plugins. If you have other plugins that modify
 the functionality of the *Add to Cart* button, this plugin may not work or
 cause unintended consequences.
 
-Development of this plugin is done at [Github](https://github.com/impossibledreams/wc-external-variations)
+Source code for this plugin can be found at [Github](https://github.com/impossibledreams/wc-external-variations)
 
 You can find this plugin at [WordPress.org](https://wordpress.org/plugins/wc-external-variations/)
-
-You can make a donation to support this project [here](https://www.paypal.com/biz/fund?id=8JX776MCWU338)
 
 == Installation ==
 
@@ -75,7 +75,8 @@ https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-d
 
 == Changelog ==
 = 1.0.14 =
-* TBD
+* Added support for HPOS
+* Added note about no more active development
 
 = 1.0.13 =
 * Fix for URLs with escaped characters
