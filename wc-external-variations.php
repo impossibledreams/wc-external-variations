@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC External Variations
  * Plugin URI: https://github.com/impossibledreams/wc-external-variations
- * Version: 1.0.15
+ * Version: 1.0.16
  *
  * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
@@ -11,7 +11,7 @@
  * Contributors: impossibledreams, yakovsh
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 6.5.1
+ * WC tested up to: 7.5.1
  *
  * Copyright: Copyright (c) 2018-2023 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0
@@ -36,6 +36,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	     * Constructor for the class, runs when the class is instantiated
 	     */
 	    public function __construct() {
+		// Declare compatibility with HCOT / HPOS
+    		add_action(
+		    'before_woocommerce_init',
+		    function() {
+			if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			    \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			}
+		    }
+		);
+
 		// Hooks into the WooCommerce initialize hook, so code in this class gets initialized after WooCommerce
 		add_action( 'woocommerce_init', array( $this, 'init' ) );
 	    }
