@@ -4,7 +4,7 @@ Tags: woocommerce, external, variations, variable
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 4.7
-Tested up to: 6.1.1
+Tested up to: 6.8.3
 Stable tag: trunk
 Requires PHP: 5.6.0
 
@@ -74,6 +74,9 @@ to a WooCommerce limit and can be bypassed by using a filter as described here:
 https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-dynamic-variable-product-dropdowns/
 
 == Changelog ==
+= 1.0.18 =
+* Updated to confirm testing with latest versions
+
 = 1.0.17 =
 * Updated to confirm testing with latest versions
 
