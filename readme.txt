@@ -9,7 +9,7 @@ Stable tag: trunk
 Requires PHP: 5.6.0
 
 A WordPress plugin that adds basic support for external products to WooCommerce variations/variable products.
-In maintenance mode with no new feature development as of 03/2023.
+No longer under active development as of 03/2023.
 
 == Description ==
 Adds basic support for external products to WooCommerce
@@ -19,8 +19,7 @@ clicks on the *Add To Cart* button. Because the Javascript is used for this,
 any adding to cart that is done via the backend such as with APIs will not
 redirect properly.
 
-Note that as of 03/2023 this plugin is in maintenance mode with no new feature development.
-Security and compatability updates will continue.
+Note that as of 03/2023 this plugin is not longer under active development.
 
 = Shortcode support  =
 
@@ -75,6 +74,9 @@ to a WooCommerce limit and can be bypassed by using a filter as described here:
 https://docs.woocommerce.com/document/change-limit-on-number-of-variations-for-dynamic-variable-product-dropdowns/
 
 == Changelog ==
+= 1.0.17 =
+* Updated to confirm testing with latest versions
+
 = 1.0.16 =
 * Re-added HTOS compatibility code
 

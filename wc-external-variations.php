@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WC External Variations
  * Plugin URI: https://github.com/impossibledreams/wc-external-variations
- * Version: 1.0.16
+ * Version: 1.0.17
  *
  * GitHub Plugin URI: https://github.com/impossibledreams/wc-external-variations
  * Description: Adds basic support for external products to WooCommerce variations/variable products
@@ -11,9 +11,9 @@
  * Contributors: impossibledreams, yakovsh
  *
  * WC requires at least: 4.0.0
- * WC tested up to: 7.5.1
+ * WC tested up to: 10.3.4
  *
- * Copyright: Copyright (c) 2018-2023 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
+ * Copyright: Copyright (c) 2018-2025 Impossible Dreams Network (email: wp-plugins@impossibledreams.net)
  * License: GNU General Public License v3.0
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
